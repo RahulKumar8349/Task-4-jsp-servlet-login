@@ -1,11 +1,18 @@
 package Controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Optional;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import Entity.Employee;
+import Service.EmployeeService;
 
 /**
  * Servlet implementation class LoginChecker
@@ -22,6 +29,46 @@ public class LoginChecker extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    
+    /**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		PrintWriter out = response.getWriter();
+		
+		//HttpSession session = request.getSession();
+		//session.setAttribute("employee", employee); 
+		
+		
+		String userName = request.getParameter("username");
+		String password = request.getParameter("password");
+		
+		//System.out.println(userName +" "+password);
+		
+		EmployeeService employeeService=new EmployeeService();
+		
+		Optional<Employee> employee = employeeService.employeeServiceList().stream().filter(emp-> emp.getUsername().equals(userName) && 
+				emp.getPassword().equals(password)).findFirst();
+		
+		//System.out.println(employee);
+		if(employee.isPresent())
+		{
+			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("home.jsp");
+			request.setAttribute("employee", employee.get());
+			requestDispatcher.include(request, response);
+		}
+		else
+		{
+			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("login.jsp");
+			request.setAttribute("message", "Invalid Credentials");
+			requestDispatcher.forward(request, response);
+		}
+		// TODO Auto-generated method stub
+		//doGet(request, response);
+	}
+    
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -30,12 +77,6 @@ public class LoginChecker extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+	
 
 }

@@ -8,14 +8,28 @@
 </head>
 <body>
     <h2>Login</h2>
-    <form action="home.jsp" method="POST">
+    
+    <form action="LoginChecker" method="POST">
         <label for="user_id">User ID:</label>
-        <input type="text" id="user_id" name="user_id" required><br><br>
+        <input type="text" id="user_id" name="username" required><br><br>
 
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br><br>
 
-        <input type="submit" value="Login">
+        <input type="submit" value="Login" name="login">
+        
+        <%
+        	String msg=(String)request.getAttribute("message");
+        	if(msg!=null)
+        	{
+        %>
+        
+        <h1><%= msg %></h1>
+        
+        <%
+        	}
+        %>
+        
     </form>
 </body>
 </html>
