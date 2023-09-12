@@ -90,7 +90,6 @@
             <td><%= employee.getSalary() %></td>
         	</tr>
         <%
-        System.out.println("ram ji");
         }
         %>   
         

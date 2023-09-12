@@ -14,25 +14,19 @@ import javax.servlet.http.HttpServletResponse;
 import Entity.Employee;
 import Service.EmployeeService;
 
-/**
- * Servlet implementation class LoginChecker
- */
+
 @WebServlet("/LoginChecker")
 public class LoginChecker extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+   
     public LoginChecker() {
         super();
         // TODO Auto-generated constructor stub
     }
 
     
-    /**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+ 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		PrintWriter out = response.getWriter();
@@ -44,14 +38,12 @@ public class LoginChecker extends HttpServlet {
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		//System.out.println(userName +" "+password);
 		
 		EmployeeService employeeService=new EmployeeService();
 		
 		Optional<Employee> employee = employeeService.employeeServiceList().stream().filter(emp-> emp.getUsername().equals(userName) && 
 				emp.getPassword().equals(password)).findFirst();
 		
-		//System.out.println(employee);
 		if(employee.isPresent())
 		{
 			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("home.jsp");
@@ -64,14 +56,10 @@ public class LoginChecker extends HttpServlet {
 			request.setAttribute("message", "Invalid Credentials");
 			requestDispatcher.forward(request, response);
 		}
-		// TODO Auto-generated method stub
-		//doGet(request, response);
+		
 	}
     
     
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
