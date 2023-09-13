@@ -39,16 +39,24 @@ public class LoginChecker extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		
-		EmployeeService employeeService=new EmployeeService();
-		
-		Optional<Employee> employee = employeeService.employeeServiceList().stream().filter(emp-> emp.getUsername().equals(userName) && 
+		Optional<Employee> employee = EmployeeService.employeeServiceList().stream().filter(emp-> emp.getUsername().equals(userName) && 
 				emp.getPassword().equals(password)).findFirst();
+		
 		
 		if(employee.isPresent())
 		{
-			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("home.jsp");
+			if(employee.get().isAdmin())
+			{
+			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("menu.jsp");
 			request.setAttribute("employee", employee.get());
 			requestDispatcher.include(request, response);
+			}
+			else
+			{
+				RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("home.jsp");
+				request.setAttribute("employee", employee.get());
+				requestDispatcher.include(request, response);
+			}
 		}
 		else
 		{

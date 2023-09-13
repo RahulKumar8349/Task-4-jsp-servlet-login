@@ -15,10 +15,8 @@
 
 <%! Employee employee;%>
 
- <% 
-    EmployeeService employeeService=new EmployeeService();
-    List<Employee> employeeList=employeeService.employeeServiceList();
-  %>
+  
+  <h1><%= "Normal User here" %></h1>
 
 <table border="1">
         <tr>
@@ -35,63 +33,23 @@
         
         <%
         	employee=(Employee)request.getAttribute("employee");
-        	if(employee.isAdmin() == true)
-        	{
-        %>
-        
-        <h1><%= "Admin here" %></h1>
-        
-        <%
-        	}
-        	else
-        	{
-        %>
-	         <h1><%= "Normal User here" %></h1>
+       
+		%>
+	         
 	        
-	        <%
-        	}
-        	%>
-        
-        
-        <%
-        
-        if(employee.isAdmin())
-        {
-        
-        for(int i=0;i<employeeList.size();i++)
-        	{
-        	
-        %>
-         <tr>
-            <td><%= employeeList.get(i).getId() %></td>
-            <td><%= employeeList.get(i).getFirstName() %></td>
-            <td><%= employeeList.get(i).getLastName() %></td>
-            <td><%= employeeList.get(i).getUsername() %></td>
-            <td><%= employeeList.get(i).getPassword() %></td>
-            <td><%= employeeList.get(i).getGender() %></td>
-            <td><%= employeeList.get(i).isAdmin() %></td>
-            <td><%= employeeList.get(i).getSalary() %></td>
-        </tr>  
-        
-        <%
-        	}
-        }
-        else
-        {
-        	%>
+	       
+       
         	<tr>
             <td><%= employee.getId() %></td>
             <td><%= employee.getFirstName() %></td>
             <td><%= employee.getLastName() %></td>
             <td><%= employee.getUsername() %></td>
-            <td><%= employee.getPassword() %></td>
+            <td><%= employee.getPassword() %></td>  
             <td><%= employee.getGender() %></td>
             <td><%= employee.isAdmin() %></td>
             <td><%= employee.getSalary() %></td>
         	</tr>
-        <%
-        }
-        %>   
+         
         
     </table>
     
