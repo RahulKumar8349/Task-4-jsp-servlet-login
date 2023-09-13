@@ -8,10 +8,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
+		<style>
+
+		
+		#mymenu
+		{
+		 background-color:rgba(0,0,0,0.4);
+		 box-shadow: 10px 10px 10px cyan;
+		 color:white;
+		 text-align:right;
+		}
+		
+		#mymenu ul li
+		{
+		 display:inline-block; 
+		 padding:25px;
+		}
+		
+		#mymenu ul li:hover
+		{
+		 background-color:blue;
+		}
+		
+		
+		</style>
+	</head>
 <body>
+
+	<div id="mymenu">
+		<ul>
+			<h1 style="color:white;text-decoration:none;text-align:center;font-size: 50px">EMPLOYEE  MANAGEMENT SYSTEM</h1>
+			<li><a href="userUpdate.jsp" style="color:white;text-decoration:none">UPDATE</a></li>
+			<li><a href="login.jsp" style="color:white;text-decoration:none">LOGOUT</a></li>
+		<ul>
+	</div>
 
 <%! Employee employee;%>
 
@@ -33,6 +63,7 @@
         
         <%
         	employee=(Employee)request.getAttribute("employee");
+        	GlobalValue.currentUser=employee.getId();
        
 		%>
 	         

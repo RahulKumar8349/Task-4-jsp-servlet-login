@@ -37,10 +37,20 @@
 		<ul>
 	</div>
 	
+	<%
+        	String msg=(String)request.getAttribute("added");
+        	if(msg!=null)
+        	{
+        %>
+        
+        <h1><%= msg %></h1>
+        
+        <%
+        	}
+        %>
+	
 	
 	<form action="CreateEmployee" method="POST">
-        <label ">User ID:</label>
-        <input type="number"  name="id" required><br><br>
         
          <label ">First Name:</label>
         <input type="text"  name="firstname" required><br><br>
@@ -54,40 +64,30 @@
         <label>Password:</label>
         <input type="password" id="password" name="password" required><br><br>
         
+
+		 Gender:
+		<label>
+            <input type="radio" name="gender" value="Male"> Male
+        </label>
         <label>
-		  Gender:
-		  <select name="gender" required>
-		    <option value="">---</option>
-		    <option name="male" >Male</option>
-		    <option name="femala">Female</option>
-		  </select>
-		</label><br><br>
-      
-		 <label>
-		  Is Admin:
-		  <select name="admin" required>
-		    <option value="">---</option>
-		    <option name="true">true</option>
-		    <option name="false">false</option>
-		  </select>
-		</label><br><br>
+            <input type="radio" name="gender" value="Female"> Female
+        </label><br><br>
+
+      	 Admin:
+		<label>
+            <input type="radio" name="admin" value="true"> Yes
+        </label>
+        <label>
+            <input type="radio" name="admin" value="false"> No
+        </label><br><br>
+        
 		
 		<label>Salary:</label>
         <input type="number"  name="salary" required><br><br>
 
         <input type="submit" value="create" name="create employee">
         
-        <%
-        	String msg=(String)request.getAttribute("added");
-        	if(msg!=null)
-        	{
-        %>
         
-        <h1><%= msg %></h1>
-        
-        <%
-        	}
-        %>
         
     </form>
 	

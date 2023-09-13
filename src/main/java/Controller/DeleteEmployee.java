@@ -26,15 +26,23 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	
 	Optional<Employee> employeeOptional=EmployeeService.employeeServiceList().stream().filter(emp->emp.getId()==Integer.parseInt(id)).findFirst();
 	
-	if(employeeOptional.isPresent())
-	{		
-		EmployeeService.employeeServiceList().remove(employeeOptional.get());
+	if(employeeOptional.isPresent() )
+	{	
+		if(employeeOptional.get().isAdmin())
+		{
+			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("delete.jsp");
+			request.setAttribute("delete", "Admin can't delete itself or any Admin");
+			requestDispatcher.include(request, response);
+		}
+		else
+		{
+			EmployeeService.employeeServiceList().remove(employeeOptional.get());
+			
+			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("delete.jsp");
+			request.setAttribute("delete", "Employee Deleted");
+			requestDispatcher.include(request, response);
+		}
 		
-		
-		
-		RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("delete.jsp");
-		request.setAttribute("delete", "Employee Deleted");
-		requestDispatcher.include(request, response);
 	}
 	else
 	{

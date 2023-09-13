@@ -38,7 +38,7 @@
 	</div>
 	
 	<%
-        	String msg=(String)request.getAttribute("update");
+        	String msg=(String)request.getAttribute("userupdate");
         	if(msg!=null)
         	{
         %>
@@ -50,9 +50,8 @@
         %>
 	
 	<br>
-	<form action="UpdateEmployee" method="POST">
-        <label ">User ID:</label>
-        <input type="number"  name="id" required><br><br>
+	<form action="UserUpdate" method="POST">
+        
         
          <label ">First Name:</label>
         <input type="text"  name="firstname" required><br><br>
@@ -74,13 +73,6 @@
             <input type="radio" name="gender" value="Female"> Female
         </label><br><br>
 
-      	 Admin:
-		<label>
-            <input type="radio" name="admin" value="true"> Yes
-        </label>
-        <label>
-            <input type="radio" name="admin" value="false"> No
-        </label><br><br>
         
         		
 		<label>Salary:</label>

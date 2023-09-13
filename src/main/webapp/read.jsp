@@ -58,24 +58,21 @@
         <label>Password:</label>
         <input type="password" id="password" name="password" ><br><br>
         
+ Gender:
+		<label>
+            <input type="radio" name="gender" value="Male"> Male
+        </label>
         <label>
-		  Gender:
-		  <select name="gender" >
-		    <option value="">---</option>
-		    <option name="male" >Male</option>
-		    <option name="femala">Female</option>
-		  </select>
-		</label><br><br>
-      
-		 <label>
-		  Is Admin:
-		  <select name="admin" >
-		    <option value="">---</option>
-		    <option name="true">true</option>
-		    <option name="false">false</option>
-		  </select>
-		</label><br><br>
-		
+            <input type="radio" name="gender" value="Female"> Female
+        </label><br><br>
+
+      	 Admin:
+		<label>
+            <input type="radio" name="admin" value="true"> Yes
+        </label>
+        <label>
+            <input type="radio" name="admin" value="false"> No
+        </label><br><br>		
 		<label>Salary:</label>
         <input type="number"  name="salary" ><br><br>
 

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Entity.Employee;
+import Entity.GlobalValue;
 import Service.EmployeeService;
 
 @WebServlet("/CreateEmployee")
@@ -17,7 +18,7 @@ public class CreateEmployee extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
+		
 		String firstname = request.getParameter("firstname");
 		String lastname = request.getParameter("lastname");
 		String username = request.getParameter("username");
@@ -26,9 +27,9 @@ public class CreateEmployee extends HttpServlet {
 		String admin = request.getParameter("admin");
 		String salary = request.getParameter("salary");
 		
-		System.out.println(id+","+firstname+","+lastname+","+username+","+password+","+gender+","+admin+","+salary);
+		System.out.println(GlobalValue.id+","+firstname+","+lastname+","+username+","+password+","+gender+","+admin+","+salary);
 		
-		Employee employee=new Employee(Integer.parseInt(id),firstname,lastname,username,password,gender,Boolean.parseBoolean(admin),Float.parseFloat(salary));
+		Employee employee=new Employee(++GlobalValue.id,firstname,lastname,username,password,gender,Boolean.parseBoolean(admin),Float.parseFloat(salary));
 		EmployeeService.employeeServiceList().add(employee);
 		
 		RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("create.jsp");

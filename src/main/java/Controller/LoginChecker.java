@@ -53,7 +53,7 @@ public class LoginChecker extends HttpServlet {
 			}
 			else
 			{
-				RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("home.jsp");
+				RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("user.jsp");
 				request.setAttribute("employee", employee.get());
 				requestDispatcher.include(request, response);
 			}
