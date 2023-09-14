@@ -4,6 +4,22 @@
 <%@ page import="Service.*" %>
 <%@ page import="Entity.*" %>
 
+<%@ page import="javax.servlet.http.HttpSession" %>
+
+<%-- 	<%! %> --%>
+	
+<%
+			Employee employee=(Employee) session.getAttribute("employee");
+			
+			if(employee!=null && employee.isAdmin())	
+			{
+		
+			List<Employee> employeeList=EmployeeService.employeeServiceList();
+        	
+        %>
+
+<%-- %> --%>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -29,15 +45,16 @@
 		 background-color:blue;
 		}
 		
-	
-		
-		
-		
-		
 		
 		</style>
 	</head>
+		
 
+
+
+
+
+ 
 	<body>
 	
 	<div id="mymenu">
@@ -46,16 +63,11 @@
 			<li><a href="create.jsp" style="color:white;text-decoration:none">CREATE</a></li>
 			<li><a href="update.jsp" style="color:white;text-decoration:none">UPDATE</a></li>
 			<li><a href="delete.jsp" style="color:white;text-decoration:none">DELETE</a></li>
-			<li><a href="login.jsp" style="color:white;text-decoration:none">LOGIN</a></li>
+			<li><a href="Logout" style="color:white;text-decoration:none">LOGOUT</a></li>
 		<ul>
 	</div>
 	
-	<%! Employee employee;%>
 
- <% 
-    EmployeeService employeeService=new EmployeeService();
-    List<Employee> employeeList=employeeService.employeeServiceList();
-  %>
 
 <table border="1">
         <tr>
@@ -70,18 +82,14 @@
         </tr>
         
         
-        <%
-        	employee=(Employee)request.getAttribute("employee");
-        	
-        %>
+        
         
         <h1><%= "Admin here" %></h1>
              
         
         <%
         
-        if(employee.isAdmin())
-        {
+        
         
         for(int i=0;i<employeeList.size();i++)
         	{
@@ -99,7 +107,7 @@
         </tr>  
         
         <%
-        	}
+        	
         }
         
         %>   
@@ -112,3 +120,16 @@
 			
 	</body>
 </html>
+
+
+<%
+		}
+		else
+		{
+			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("login.jsp");
+			request.setAttribute("message", "Please Authenticate that you are Admin");
+			requestDispatcher.forward(request, response);	
+		}
+	
+
+%>

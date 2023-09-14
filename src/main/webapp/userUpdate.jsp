@@ -1,6 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+    <%@ page import="java.util.*" %>
+<%@ page import="Service.*" %>
+<%@ page import="Entity.*" %>
+
 <!DOCTYPE html>
+
+
+		<%
+			Employee employee=(Employee) session.getAttribute("employee");
+			
+			if(employee!=null && employee.isAdmin()==false)	
+			{
+				GlobalValue.currentUser=employee.getId();
+		
+        	
+        %>
+        
+        
 <html>
 	<head>
 		<style>
@@ -87,3 +105,15 @@
 			
 	</body>
 </html>
+
+<%
+		}
+		else
+		{
+			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("login.jsp");
+			request.setAttribute("message", "Please Authenticate that you are User");
+			requestDispatcher.forward(request, response);	
+		}
+	
+
+%>

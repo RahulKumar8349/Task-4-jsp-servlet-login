@@ -6,6 +6,17 @@
 <%@ page import="Entity.*" %>
 
 <!DOCTYPE html>
+
+<%
+			Employee employee=(Employee) session.getAttribute("employee");
+			
+			if(employee!=null && employee.isAdmin()==false)	
+			{
+				GlobalValue.currentUser=employee.getId();
+		
+        	
+        %>
+        
 <html>
 <head>
 		<style>
@@ -39,11 +50,11 @@
 		<ul>
 			<h1 style="color:white;text-decoration:none;text-align:center;font-size: 50px">EMPLOYEE  MANAGEMENT SYSTEM</h1>
 			<li><a href="userUpdate.jsp" style="color:white;text-decoration:none">UPDATE</a></li>
-			<li><a href="login.jsp" style="color:white;text-decoration:none">LOGOUT</a></li>
+			<li><a href="Logout" style="color:white;text-decoration:none">LOGOUT</a></li>
 		<ul>
 	</div>
 
-<%! Employee employee;%>
+
 
   
   <h1><%= "Normal User here" %></h1>
@@ -59,13 +70,7 @@
             <th>Is Admin</th>
             <th>Salary</th>
         </tr>
-        
-        
-        <%
-        	employee=(Employee)request.getAttribute("employee");
-        	GlobalValue.currentUser=employee.getId();
-       
-		%>
+     
 	         
 	        
 	       
@@ -88,3 +93,18 @@
 
 </body>
 </html>
+
+
+
+
+<%
+		}
+		else
+		{
+			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("login.jsp");
+			request.setAttribute("message", "Please Authenticate that you are User");
+			requestDispatcher.forward(request, response);	
+		}
+	
+
+%>

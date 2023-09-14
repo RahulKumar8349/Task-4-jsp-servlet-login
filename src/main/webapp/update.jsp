@@ -1,9 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+    <%@ page import="java.util.*" %>
+<%@ page import="Service.*" %>
+<%@ page import="Entity.*" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<style>
+<%
+			Employee employee=(Employee) session.getAttribute("employee");
+			
+			if(employee!=null && employee.isAdmin())	
+			{
+		
+			List<Employee> employeeList=EmployeeService.employeeServiceList();
+        	
+        %>
+        
+
+
 
 		
 		#mymenu
@@ -95,3 +112,16 @@
 			
 	</body>
 </html>
+
+
+        <%
+		}
+		else
+		{
+			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("login.jsp");
+			request.setAttribute("message", "Please Authenticate that you are Admin");
+			requestDispatcher.forward(request, response);	
+		}
+	
+
+%>

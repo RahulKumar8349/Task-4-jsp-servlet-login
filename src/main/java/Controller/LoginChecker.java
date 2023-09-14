@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Entity.Employee;
 import Service.EmployeeService;
@@ -30,9 +31,12 @@ public class LoginChecker extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		PrintWriter out = response.getWriter();
+		HttpSession httpsession ;
 		
 		//HttpSession session = request.getSession();
 		//session.setAttribute("employee", employee); 
+		 
+		// String userName = (String) httpsession.getAttribute("userName");
 		
 		
 		String userName = request.getParameter("username");
@@ -47,12 +51,16 @@ public class LoginChecker extends HttpServlet {
 		{
 			if(employee.get().isAdmin())
 			{
+				httpsession = request.getSession();
+				httpsession.setAttribute("employee", employee.get());
 			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("menu.jsp");
 			request.setAttribute("employee", employee.get());
 			requestDispatcher.include(request, response);
 			}
 			else
 			{
+				httpsession = request.getSession();
+				httpsession.setAttribute("employee", employee.get());
 				RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("user.jsp");
 				request.setAttribute("employee", employee.get());
 				requestDispatcher.include(request, response);
