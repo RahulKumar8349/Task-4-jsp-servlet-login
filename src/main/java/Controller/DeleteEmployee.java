@@ -30,26 +30,32 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	{	
 		if(employeeOptional.get().isAdmin())
 		{
-			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("delete.jsp");
-			request.setAttribute("delete", "Admin can't delete itself or any Admin");
+			response.sendRedirect("menu.jsp");
+			
+			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("menu.jsp");
+			request.setAttribute("admin", "Admin can't delete itself or any Admin");
 			requestDispatcher.include(request, response);
 		}
 		else
 		{
-			EmployeeService.employeeServiceList().remove(employeeOptional.get());
 			
-			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("delete.jsp");
-			request.setAttribute("delete", "Employee Deleted");
+			EmployeeService.employeeServiceList().remove(employeeOptional.get());
+			response.sendRedirect("menu.jsp");
+			
+			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("menu.jsp");
+			request.setAttribute("admin", "Employee Deleted");
 			requestDispatcher.include(request, response);
 		}
 		
 	}
 	else
 	{
-		RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("delete.jsp");
-		request.setAttribute("delete", "Employee doesn't exist of id : "+id);
+		response.sendRedirect("menu.jsp");
+		RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("menu.jsp");
+		request.setAttribute("admin", "Employee doesn't exist of id : "+id);
 		requestDispatcher.include(request, response);
 	}
+
 	}
 
     public DeleteEmployee() {

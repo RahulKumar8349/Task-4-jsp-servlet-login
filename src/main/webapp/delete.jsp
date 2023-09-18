@@ -43,6 +43,13 @@
 
 		</style>
 	</head>
+	
+	<%
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+response.setHeader("Pragma", "no-cache");
+response.setDateHeader("Expires", 0);
+%>
+	
 
 	<body>
 	
@@ -67,7 +74,7 @@
 	
 	<form action="DeleteEmployee" method="POST">
         <label ">User ID:</label>
-        <input type="number"  name="id" placeholder="Enter Employee Id" required>
+        <input type="number"  name="did" placeholder="Enter Employee Id" required>
         <input type="submit" value="delete" name="delete"><br><br>
     
         

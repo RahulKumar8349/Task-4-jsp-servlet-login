@@ -18,9 +18,12 @@ public class Logout extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		if (session != null) 
 		session.invalidate();
+		
 		RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("login.jsp");
 		request.setAttribute("message", "You are Logged out");
-		requestDispatcher.forward(request, response);
+		//requestDispatcher.forward(request, response);
+		
+		response.sendRedirect("login.jsp");
 	}
 
     public Logout() {

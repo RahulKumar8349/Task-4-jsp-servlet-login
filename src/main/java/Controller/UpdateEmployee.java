@@ -25,13 +25,14 @@ public class UpdateEmployee extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String gender = request.getParameter("gender");
-		String admin = request.getParameter("admin");
+		//String admin = request.getParameter("isAdmin");
 		String salary = request.getParameter("salary");
 		
 		
 		
 		Optional<Employee> employeeOptional=EmployeeService.employeeServiceList().stream().filter(emp->emp.getId()==Integer.parseInt(id)).findFirst();
 		
+		System.out.println(id);
 		if(employeeOptional.isPresent())
 		{
 			Employee employee=employeeOptional.get();
@@ -42,20 +43,24 @@ public class UpdateEmployee extends HttpServlet {
 			employee.setUsername(username);
 			employee.setPassword(password);
 			employee.setGender(gender);
-			employee.setAdmin(Boolean.parseBoolean(admin));
+			//employee.setAdmin(Boolean.parseBoolean(admin));
 			employee.setSalary(Float.parseFloat(salary));
 			
-			
+			response.sendRedirect("menu.jsp");
 			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("update.jsp");
 			request.setAttribute("update", "Employee Updated");
 			requestDispatcher.include(request, response);
 		}
 		else
 		{
+			response.sendRedirect("menu.jsp");
 			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("update.jsp");
 			request.setAttribute("update", "Employee doesn't exist of id : "+id);
 			requestDispatcher.include(request, response);
 		}
+		
+		
+		
 	}
 	
 	

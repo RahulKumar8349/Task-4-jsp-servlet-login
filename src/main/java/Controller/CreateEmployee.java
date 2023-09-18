@@ -36,6 +36,7 @@ public class CreateEmployee extends HttpServlet {
 		Employee employee=new Employee(++GlobalValue.id,firstname,lastname,username,password,gender,Boolean.parseBoolean(admin),Float.parseFloat(salary));
 		EmployeeService.employeeServiceList().add(employee);
 		
+		response.sendRedirect("menu.jsp");
 		RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("create.jsp");
 		request.setAttribute("added", "Data Added");
 		requestDispatcher.include(request, response);

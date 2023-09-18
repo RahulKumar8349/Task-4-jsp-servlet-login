@@ -51,19 +51,21 @@ public class LoginChecker extends HttpServlet {
 		{
 			if(employee.get().isAdmin())
 			{
-				httpsession = request.getSession();
+				httpsession = request.getSession(true);
 				httpsession.setAttribute("employee", employee.get());
+			response.sendRedirect("menu.jsp");	
 			RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("menu.jsp");
 			request.setAttribute("employee", employee.get());
-			requestDispatcher.include(request, response);
+			//requestDispatcher.include(request, response);
 			}
 			else
 			{
-				httpsession = request.getSession();
+				httpsession = request.getSession(true);
 				httpsession.setAttribute("employee", employee.get());
 				RequestDispatcher 	requestDispatcher = request.getRequestDispatcher("user.jsp");
 				request.setAttribute("employee", employee.get());
-				requestDispatcher.include(request, response);
+				response.sendRedirect("user.jsp");	
+				//requestDispatcher.include(request, response);
 			}
 		}
 		else
